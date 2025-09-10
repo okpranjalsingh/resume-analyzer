@@ -1,0 +1,57 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Resume Upload History</title>
+    <link rel="stylesheet" href="{% static 'analyzer/style.css' %}">
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Resume Upload History</h1>
+        <p class="subtitle">All previously uploaded resumes</p>
+    </header>
+
+    {% if resumes %}
+    <div class="history-table">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Uploaded At</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for resume in resumes %}
+                <tr>
+                    <td>{{ resume.id }}</td>
+                    <td>{{ resume.name }}</td>
+                    <td>{{ resume.email }}</td>
+                    <td>{{ resume.phone }}</td>
+                    <td>{{ resume.uploaded_at|date:"Y-m-d H:i" }}</td>
+                    <td>
+                        <a href="{% url 'download_json' %}?resume_id={{ resume.id }}" class="btn action-btn json-btn">JSON</a>
+                        <a href="{% url 'download_csv' %}?resume_id={{ resume.id }}" class="btn action-btn csv-btn">CSV</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <p>No resumes uploaded yet.</p>
+    {% endif %}
+
+    <footer>
+        @ Developed by Pranjal Singh
+    </footer>
+</div>
+
+</body>
+</html>

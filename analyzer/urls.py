@@ -3,5 +3,8 @@ from . import views
 
 urlpatterns = [
     path('', views.home, name='home'),
-    path('result/', views.result, name='result'),
+    path('history/', views.history, name='history'),
+    path('download/json/', views.download_json, name='download_json'),
+    path('download/csv/', views.download_csv, name='download_csv'),
+    path('results/', views.result, name='result'),
 ]
