@@ -9,8 +9,7 @@ import csv
 
 
 def home(request):
-    return HttpResponse("Home view is working!")
-
+    return render(request, 'analyzer/home.html')
 
 '''predefined keywords'''
 SKILLS = ['Python', 'Django', 'DRF', 'FastAPI', 'SQL', 'MySQL', 'PostgreSQL',
