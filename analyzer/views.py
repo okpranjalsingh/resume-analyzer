@@ -7,6 +7,11 @@ import re
 import json
 import csv
 
+
+def home(request):
+    return HttpResponse("Home view is working!")
+
+
 '''predefined keywords'''
 SKILLS = ['Python', 'Django', 'DRF', 'FastAPI', 'SQL', 'MySQL', 'PostgreSQL',
           'HTML', 'CSS', 'JavaScript', 'Docker', 'Git', 'AWS', 'Postman']
@@ -169,4 +174,7 @@ def download_csv(request):
 def result(request):
     resumes = Resume.objects.all()
     return render(request, 'analyzer/results.html', {'resumes': resumes})
+
+
+
 
