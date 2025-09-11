@@ -135,21 +135,20 @@
 
 
 
-
 from pathlib import Path
 import os
 
+# BASE DIR
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# SECURITY
+# SECRET & DEBUG from environment
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'fallback-secret-key')
 DEBUG = os.environ.get('DEBUG', 'False') == 'True'
-ALLOWED_HOSTS = os.environ.get(
-    'ALLOWED_HOSTS', 
-    'resume-analyzer-gcqt.onrender.com,localhost,127.0.0.1'
-).split(',')
 
-# Application definition
+# ALLOWED HOSTS from environment
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost,127.0.0.1,resume-analyzer-gcqt.onrender.com').split(',')
+
+# Installed apps
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -160,8 +159,9 @@ INSTALLED_APPS = [
     'analyzer',
 ]
 
+# Middleware (Whitenoise at the top)
 MIDDLEWARE = [
-    'whitenoise.middleware.WhiteNoiseMiddleware', 
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # SERVE STATIC FILES
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -171,8 +171,11 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+# URLs & WSGI
 ROOT_URLCONF = 'resume_analyzer.urls'
+WSGI_APPLICATION = 'resume_analyzer.wsgi.application'
 
+# Templates
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -187,8 +190,6 @@ TEMPLATES = [
         },
     },
 ]
-
-WSGI_APPLICATION = 'resume_analyzer.wsgi.application'
 
 # Database
 DATABASES = {
@@ -212,15 +213,14 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
 
-# Static files
+# Static files (CSS, JS)
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # Render uses this
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-
-# Media files
+# Media files (uploads)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
-# Default primary key field type
+# Default primary key
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
