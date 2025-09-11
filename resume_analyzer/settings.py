@@ -152,7 +152,7 @@ SECRET_KEY = 'django-insecure-+6k&%ebxdak=clnycc=!cul9i21755s^**8g9sm5q)d76o9ks$
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['deployforpranjal.pythonanywhere.com']
+ALLOWED_HOSTS = ['resume-analyzer-gcqt.onrender.com', 'localhost', '127.0.0.1']
 
 
 # Application definition
